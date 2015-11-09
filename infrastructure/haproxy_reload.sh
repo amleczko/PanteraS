@@ -26,10 +26,10 @@ preconfigure() {
     real_port="${!instance_prefix}${real}"
     stats_port="${!instance_prefix}${stats}"
     iptables -w -t nat -N ${chain}
-    iptables -w -t nat -A ${chain} -m state --state NEW -p tcp -d ${HOST_IP} --dport 80 -j REDIRECT --to ${real_port}
+    iptables -w -t nat -A ${chain} -m state --state NEW -p tcp -d ${HOST_IP} --dport 82 -j REDIRECT --to ${real_port}
     iptables -w -t nat -A ${chain} -m state --state NEW -p tcp -d ${HOST_IP} --dport 81 -j REDIRECT --to ${stats_port}
     [ -n "${KEEPALIVED_VIP}" ] && {
-      iptables -w -t nat -A ${chain} -m state --state NEW -p tcp -d ${KEEPALIVED_VIP} --dport 80 -j REDIRECT --to ${real_port}
+      iptables -w -t nat -A ${chain} -m state --state NEW -p tcp -d ${KEEPALIVED_VIP} --dport 82 -j REDIRECT --to ${real_port}
       iptables -w -t nat -A ${chain} -m state --state NEW -p tcp -d ${KEEPALIVED_VIP} --dport 81 -j REDIRECT --to ${stats_port}
     }
   done

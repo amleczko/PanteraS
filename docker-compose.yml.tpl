@@ -57,6 +57,6 @@ panteras:
     - "/etc/resolv.conf:/etc/resolv.conf.orig"
     - "/var/spool/marathon/artifacts/store:/var/spool/store"
     - "/var/run/docker.sock:/tmp/docker.sock"
-    - "/var/lib/docker:/var/lib/docker"
+    - "/home/docker/var:/var/lib/docker"
     - "/sys:/sys"
     - "/tmp/mesos:/tmp/mesos"
