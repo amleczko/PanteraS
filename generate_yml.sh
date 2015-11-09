@@ -98,7 +98,7 @@ DNSMASQ_ADDRESS=${DNSMASQ_ADDRESS:-"--address=/consul/${CONSUL_IP}"}
 #
 # -config-dir=/etc/consul.d/ \
 CONSUL_PARAMS="agent \
- -client=0.0.0.0 \
+ -client=${HOST_IP} \
  -data-dir=/opt/consul/ \
  -ui-dir=/opt/consul/dist/ \
  -advertise=${HOST_IP} \
@@ -124,13 +124,14 @@ DNSMASQ_PARAMS="-d \
 MARATHON_PARAMS="--master zk://${ZOOKEEPER_HOSTS}/mesos \
  --zk zk://${ZOOKEEPER_HOSTS}/marathon \
  --hostname ${HOSTNAME} \
+ --http_address ${HOST_IP} \
  --no-logger \
  ${MARATHON_PARAMS}"
 #
 MESOS_MASTER_PARAMS="--zk=zk://${ZOOKEEPER_HOSTS}/mesos \
  --work_dir=/var/lib/mesos \
  --quorum=${MESOS_MASTER_QUORUM} \
- --ip=0.0.0.0 \
+ --ip=${HOST_IP} \
  --hostname=${FQDN} \
  --cluster=${MESOS_CLUSTER_NAME} \
  ${MESOS_MASTER_PARAMS}"
@@ -139,7 +140,7 @@ MESOS_SLAVE_PARAMS="--master=zk://${ZOOKEEPER_HOSTS}/mesos \
  --containerizers=docker,mesos \
  --executor_registration_timeout=5mins \
  --hostname=${FQDN} \
- --ip=0.0.0.0 \
+ --ip=${HOST_IP} \
  --docker_stop_timeout=5secs \
  --gc_delay=1days \
  --docker_socket=/tmp/docker.sock \
