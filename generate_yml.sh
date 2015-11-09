@@ -103,6 +103,7 @@ CONSUL_PARAMS="agent \
  -ui-dir=/opt/consul/dist/ \
  -advertise=${HOST_IP} \
  -node=${HOSTNAME} \
+ -bind=${HOST_IP} \
  -dc=${CONSUL_DC} \
  ${CONSUL_MODE} \
  ${CONSUL_HOSTS} \
